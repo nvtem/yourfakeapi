@@ -1,0 +1,72 @@
+{
+  "endpoints": {
+    "development": "http://localhost:2000/api",
+    "production": "/api"
+  },
+  "requests": {
+
+
+    "REGISTER": {
+      "path": "user/register",
+      "method": "POST"
+    },
+    "LOGIN": {
+      "path": "user/login",
+      "method": "POST"
+    },
+    "GET_USER_DATA": {
+      "path": "user/getUserData",
+      "method": "GET"
+    },
+    "CHANGE_PASSWORD": {
+      "path": "user/changePassword",
+      "method": "POST"
+    },
+
+
+
+    "GET_ENDPOINTS": {
+      "path": "endpoints",
+      "method": "GET"
+    },
+    "GET_ENDPOINT": {
+      "path": "endpoints/:endpoint_id",
+      "method": "GET"
+    },
+    "CREATE_ENDPOINT": {
+      "path": "endpoints",
+      "method": "POST"
+    },
+    "UPDATE_ENDPOINT": {
+      "path": "endpoints/:endpoint_id",
+      "method": "PUT"
+    },
+    "DELETE_ENDPOINT": {
+      "path": "endpoints/:endpoint_id",
+      "method": "DELETE"
+    },
+
+
+
+    "GET_URLS": {
+      "path": "endpoints/:endpoint_id/urls",
+      "method": "GET"
+    },
+    "GET_URL": {
+      "path": "endpoints/:endpoint_id/urls/:url_id",
+      "method": "GET"
+    },
+    "CREATE_URL": {
+      "path": "endpoints/:endpoint_id/urls",
+      "method": "POST"
+    },
+    "UPDATE_URL": {
+      "path": "endpoints/:endpoint_id/urls/:url_id",
+      "method": "PUT"
+    },
+    "DELETE_URL": {
+      "path": "endpoints/:endpoint_id/urls/:url_id",
+      "method": "DELETE"
+    }
+  }
+}

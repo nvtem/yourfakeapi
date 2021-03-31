@@ -1,0 +1,52 @@
+{
+  "name": "yourfakeapi",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev_server\" \"npm run dev_client",
+    "dev_server": "cross-env NODE_ENV=development PORT=2000 node server/index.js",
+    "dev_client": "cross-env NODE_ENV=development vue-cli-service serve --port 1000",
+    "build": "cross-env NODE_ENV=production vue-cli-service build",
+    "start": "cross-env NODE_ENV=production node server/index.js"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.11",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "express-jwt-middleware": "^1.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongodb": "^3.5.9",
+    "pug": "^3.0.0",
+    "pug-loader": "^2.4.0",
+    "pug-plain-loader": "^1.0.0",
+    "vue": "^2.6.11",
+    "vue-i18n": "^8.18.1",
+    "vue-router": "^3.2.0",
+    "vue2-ace-editor": "0.0.15",
+    "vuelidate": "^0.7.5",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.4.0",
+    "@vue/cli-plugin-router": "^4.4.0",
+    "@vue/cli-plugin-vuex": "^4.4.0",
+    "@vue/cli-service": "^4.4.0",
+    "concurrently": "^5.2.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
