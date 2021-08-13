@@ -57,12 +57,17 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+  while (!store.state.auth.initialized)
+    await sleep(20)
+
   const isLogged = store.getters['auth/isLogged']
 
   if (to.matched.some(route => route.meta.requiresAuth) && !isLogged)

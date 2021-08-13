@@ -2,6 +2,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    initialized: false,
     username: ''
   }),
 
@@ -14,6 +15,7 @@ export default {
   mutations: {
     setUsername(state, username) {
       state.username = username
+      state.initialized = true
     },
 
     setToken(state, token) {
