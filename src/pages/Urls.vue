@@ -71,7 +71,12 @@
 
     computed: {
       endpointUrl() {
-        return `${location.origin}/endpoint/${this.endpointID}`
+        let url = `${location.origin}/endpoint/${this.endpointID}`
+
+        if (process.env.NODE_ENV === 'development')
+          url = url.replace(/:1000/, ':2000')
+
+        return url
       },
 
       fields() {
