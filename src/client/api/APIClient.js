@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { endpoints, requests } from './config'
+import { endpoints, requests } from './config.json'
 import _ from 'lodash'
 
 function interpolateVariables(s, data) {

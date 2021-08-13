@@ -25,7 +25,7 @@ const mongoClient = new MongoClient(process.env.MONGODB_URL, { useNewUrlParser: 
 mongoClient.connect((err, client) => {
   Model.setDB(client.db('yourfakeapi'))
 
-  app.use(express.static('dist'))
+  app.use(express.static('src/client/dist'))
 
   app.use('/api/user', userRouter)
   app.use('/api/endpoints', endpointsRouter)
