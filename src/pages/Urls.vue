@@ -1,7 +1,10 @@
 <template lang="pug">
   b-container
     h2 URLs
-    p Endpoint: {{ this.endpointName }} | {{ this.endpointUrl }}
+    p
+      | Endpoint: {{ this.endpointName }}
+      br
+      | {{ this.endpointUrl }}
 
     b-button.mr-2.mb-3(:to="`/endpoints`" variant="outline-dark") Back
     b-button.mb-3(:to="`/endpoints/${endpointID}/urls/new`" variant="dark") New
