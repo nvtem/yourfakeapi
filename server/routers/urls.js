@@ -1,4 +1,4 @@
-const express = require('express')
+﻿const express = require('express')
 const jwtMiddleware = require('express-jwt-middleware')('superkey')
 const attachUser = require('../middlewares/attachUser')
 const Url = require('../models/Url')
@@ -6,10 +6,9 @@ const { ObjectID } = require('mongodb')
 const router = express.Router({ mergeParams: true })
 const Endpoint = require('../models/Endpoint')
 
-function findUrl(req) {
+function findUrl(id) {
   return Url.findOneByParams({
-    _id: ObjectID(req.params.url_id),
-    owner: req.user.username
+    _id: ObjectID(id)
   })
 }
 
@@ -23,7 +22,7 @@ router.get('/', jwtMiddleware, attachUser, async (req, res) => {
 })
 
 router.get('/:url_id', jwtMiddleware, attachUser, async (req, res) => {
-  const url = await findUrl(req)
+  const url = await findUrl(req.params.url_id)
 
   if (url)
     res.json({ url: url.data })
@@ -32,29 +31,43 @@ router.get('/:url_id', jwtMiddleware, attachUser, async (req, res) => {
 })
 
 router.put('/:url_id', jwtMiddleware, attachUser, async (req, res) => {
-  const url = await Url.findOneByParams({
-    _id: ObjectID(req.params.url_id),
-    owner: req.user.username
-  })
+  const urlID = req.params.url_id
+
+  const url1 = await findUrl(urlID)
+
+  if (!url1) {
+    res.status(404).send()
+    return
+  }
 
   const input = validateAndTransformURLInput(req.body)
 
-  if (url && input) {
-    await url.update(input)
+  const url2 = await Url.findOneByParams({
+    path: input.path,
+    endpoint_id: req.params.endpoint_id
+  })
+
+  if (url2 && url1._id !== url2._id) {
+    res.status(409).send()
+    return
+  }
+
+  if (input) {
+    await url1.update(input)
     res.status(204).send()
   } else {
-    res.status(400)
+    res.status(400).send()
   }
 })
 
 router.delete('/:url_id', jwtMiddleware, attachUser, async (req, res) => {
-  const url = await findUrl(req)
+  const url = await findUrl(req.params.url_id)
 
   if (url) {
     await url.remove()
     res.status(204).send()
   } else {
-    res.status(404)
+    res.status(404).send()
   }
 })
 
@@ -68,6 +81,16 @@ router.post('/', jwtMiddleware, attachUser, async (req, res) => {
 
   if (endpoint) {
     const input = validateAndTransformURLInput(req.body)
+
+    const url = await Url.findOneByParams({
+      endpoint_id,
+      path: req.body.path
+    })
+
+    if (url) {
+      res.status(409).send()
+      return
+    }
 
     if (input) {
       Url.create({

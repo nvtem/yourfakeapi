@@ -134,6 +134,11 @@
         if (data.path.startsWith('/'))
           data.path = data.path.substr(1)
 
+        if (data.path === '') {
+          alert('Enter path!')
+          return false
+        }
+
         if (this.URLType === 'single')
           data.responses = this.responses
         else
@@ -142,6 +147,9 @@
         this.$api.request(requestType, params, data)
           .then(r => {
             this.$router.push(`/endpoints/${this.endpointID}/urls`)
+          })
+          .catch(() => {
+            alert('Error! URL already exists')
           })
       },
 

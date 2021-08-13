@@ -24,7 +24,7 @@ module.exports = class Model {
 
     if (doc) {
       let instance = new this()
-      instance._id = doc._id
+      instance._id = doc._id.toString()
       instance.data = doc
 
       return instance
