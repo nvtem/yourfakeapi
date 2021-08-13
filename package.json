@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev_server\" \"npm run dev_client",
-    "dev_server": "cross-env NODE_ENV=development PORT=2000 node server/index.js",
+    "dev_server": "cross-env NODE_ENV=development PORT=2000 nodemon server/index.js",
     "dev_client": "cross-env NODE_ENV=development vue-cli-service serve --port 1000",
     "build": "cross-env NODE_ENV=production vue-cli-service build",
     "start": "cross-env NODE_ENV=production node server/index.js"
@@ -40,6 +40,7 @@
     "@vue/cli-plugin-vuex": "^4.4.0",
     "@vue/cli-service": "^4.4.0",
     "concurrently": "^5.2.0",
+    "nodemon": "^2.0.12",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.6.11"
