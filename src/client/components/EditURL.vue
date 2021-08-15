@@ -112,18 +112,17 @@
           }
         }
 
-        let requestType, params
+        let requestType
+
+        const params = {
+          endpoint_id: this.endpointID
+        }
 
         if (this.mode === 'create') {
           requestType = 'CREATE_URL'
-          params = {
-            endpoint_id: this.endpointID
-          }
         } else {
           requestType = 'UPDATE_URL'
-          params = {
-            url_id: this.id
-          }
+          params.url_id = this.id
         }
 
         let data = {
