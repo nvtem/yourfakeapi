@@ -33,7 +33,7 @@
       URLType: 'single',
       json: true,
       path: '/',
-      resource: '',
+      resource: '{}',
       responses: {
         GET: '{}',
         POST: '{}',
